@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>mike.buckner</sys_created_by>
+        <sys_created_on>2018-03-27 14:15:15</sys_created_on>
+        <sys_id>a71c7822db4553400994dfea5e9619dd</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_snc_maintenances_maintenance_scheduler_table.x_snc_maintenances.user</sys_name>
+        <sys_package display_value="Maintenance Scheduler" source="x_snc_maintenances">0f1cf4eadb0553400994dfea5e96191c</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Maintenance Scheduler">0f1cf4eadb0553400994dfea5e96191c</sys_scope>
+        <sys_security_acl display_value="x_snc_maintenances_maintenance_scheduler_table">ab1c7822db4553400994dfea5e9619da</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_a71c7822db4553400994dfea5e9619dd</sys_update_name>
+        <sys_updated_by>mike.buckner</sys_updated_by>
+        <sys_updated_on>2018-03-27 14:15:15</sys_updated_on>
+        <sys_user_role display_value="x_snc_maintenances.user" name="x_snc_maintenances.user">c71c3822db4553400994dfea5e96195b</sys_user_role>
+        <transaction_id/>
+    </sys_security_acl_role>
+</record_update>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>true</action_insert>
+        <action_query>false</action_query>
+        <action_update>false</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_snc_maintenances_maintenance_scheduler_table</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Schedule CI Maintenance</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
+	var cis = current.cmdb_ci.split(",");
+	gs.info("***Maint Logging Start*** " + cis[0]);
+	for (var ci in cis) {
+		gs.info("***Maint Logging*** " + cis[ci]);
+		var scriptToStartMaint =
+		"var ciForMaint = new GlideRecord('cmdb_ci_server');\n" +
+        "ciForMaint.get('"+cis[ci]+"');\n" +
+		"ciForMaint.install_status = 3;\n" +
+		"ciForMaint.update();";
+		var sys_trigger = new GlideRecord('sys_trigger');
+		sys_trigger.initialize();
+		sys_trigger.name = cis[ci] + '_MaintJobStart' + current.maintenance_start;
+		sys_trigger.next_action = current.maintenance_start;
+		sys_trigger.script = scriptToStartMaint;
+		sys_trigger.trigger_type = 0;
+		sys_trigger.insert();
+		
+		var scriptToEndMaint =
+		"var ciForMaint = new GlideRecord('cmdb_ci_server');\n" +
+        "ciForMaint.get('"+cis[ci]+"');\n" +
+		"ciForMaint.install_status = 1;\n" +
+		"ciForMaint.update();";
+		var sys_trigger_end = new GlideRecord('sys_trigger');
+		sys_trigger_end.initialize();
+		sys_trigger_end.name = cis[ci] + '_MaintJobEnd' + current.maintenance_end;
+		sys_trigger_end.next_action = current.maintenance_end;
+		sys_trigger_end.script = scriptToEndMaint;
+		sys_trigger_end.trigger_type = 0;
+		sys_trigger_end.insert();
+		
+	}
+	
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>mike.buckner</sys_created_by>
+        <sys_created_on>2018-03-27 15:11:29</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>1c38092edb4553400994dfea5e961971</sys_id>
+        <sys_mod_count>19</sys_mod_count>
+        <sys_name>Schedule CI Maintenance</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Maintenance Scheduler" source="x_snc_maintenances">0f1cf4eadb0553400994dfea5e96191c</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Maintenance Scheduler">0f1cf4eadb0553400994dfea5e96191c</sys_scope>
+        <sys_update_name>sys_script_1c38092edb4553400994dfea5e961971</sys_update_name>
+        <sys_updated_by>mike.buckner</sys_updated_by>
+        <sys_updated_on>2018-03-27 17:37:01</sys_updated_on>
+        <template/>
+        <when>async</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=1c38092edb4553400994dfea5e961971"/>
+</record_update>

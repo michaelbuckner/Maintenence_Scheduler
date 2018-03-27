@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Maintenance Scheduler Table" max_length="40" name="x_snc_maintenances_maintenance_scheduler_table" type="collection">
+        <element label="Configuration Item" max_length="4000" name="cmdb_ci" reference="cmdb_ci_server" type="glide_list"/>
+        <element label="Maintenance End" max_length="40" name="maintenance_end" type="glide_date_time"/>
+        <element label="Maintenance Start" max_length="40" name="maintenance_start" type="glide_date_time"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
+    </element>
+</database>
